@@ -43,8 +43,25 @@ def analyze_endpoint():
         fixed_json = remove_trailing_commas(clean_result)
         #print("JSON string after removing trailing commas:", repr(fixed_json))
 
+        # Fallback: if the cleaned response doesn’t start with a JSON object
+        if not fixed_json.strip().startswith("{"):
+         return jsonify({
+            "analysis": {
+                "compatibility": "Unknown",
+                "issues": ["Unable to parse the response as JSON."],
+                "recommendations": ["Ensure the ABAP code input is correct."]
+            }
+        })
+        if not fixed_json:
+            return jsonify({"error": "Empty JSON response from analyzer"}), 500
+
         analysis_json = json.loads(fixed_json)
+        required_keys = {"compatibility", "issues", "recommendations"}
+        if not required_keys.issubset(analysis_json.keys()):
+            return jsonify({"error": "Incomplete analysis data"}), 500
+        
         return jsonify({"analysis": analysis_json})
+    
     except Exception as e:
         print("Error parsing JSON:", e)
         return jsonify({"error": f"Failed to analyze ABAP code: {str(e)}"}), 500
