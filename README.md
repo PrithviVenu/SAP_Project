@@ -1,4 +1,4 @@
-# ABAP Code Analyzer
+# ABAP to S/4HANA Analyzer & Conversion Tool
 
 A web app that analyzes ABAP code for SAP S/4HANA compatibility, identifies deprecated functions, suggests modern replacements, and provides refactored S/4HANA-compliant code using OpenAI's API.
 
