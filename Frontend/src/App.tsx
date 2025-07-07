@@ -6,6 +6,7 @@ interface AnalysisResult {
   recommendations: string[];
   converted_code?: string;
 }
+
 // Normalizes the compatibility string for consistent display
 function normalizeCompatibility(text: string) {
   let norm = text.trim().toLowerCase();
@@ -79,39 +80,57 @@ export default function App() {
             background: "#f9f9f9",
             padding: 16,
             borderRadius: 8,
+            display: "flex",
+            gap: 20,
+            alignItems: "flex-start",
           }}
         >
-          <h2>Analysis Result:</h2>
+          {/* Left side: Analysis */}
+          <div style={{ flex: 1 }}>
+            <h2>Analysis Result:</h2>
 
-          <p>
-            <strong>Compatibility:</strong> {result.compatibility}
-          </p>
+            <p>
+              <strong>Compatibility:</strong> {result.compatibility}
+            </p>
 
-          <div>
-            <strong>Issues:</strong>
-            <ul>
-              {result.issues.map((issue, index) => (
-                <li key={index}>{issue}</li>
-              ))}
-            </ul>
+            <div>
+              <strong>Issues:</strong>
+              <ul>
+                {result.issues.map((issue, index) => (
+                  <li key={index}>{issue}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <strong>Recommendations:</strong>
+              <ul>
+                {result.recommendations.map((rec, index) => (
+                  <li key={index}>{rec}</li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <strong>Recommendations:</strong>
-            <ul>
-              {result.recommendations.map((rec, index) => (
-                <li key={index}>{rec}</li>
-              ))}
-            </ul>
-          </div>
+          {/* Right side: Converted Code */}
           {result.converted_code && (
-            <div style={{ marginTop: 20 }}>
-              <strong>Converted Code:</strong>
+            <div
+              style={{
+                flex: 1,
+                backgroundColor: "#f0f0f0",
+                padding: 12,
+                borderRadius: 8,
+                maxHeight: 400,
+                overflowY: "auto",
+                fontFamily: "monospace",
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              <h2>Converted Code:</h2>
               <pre
                 style={{
-                  backgroundColor: "#f0f0f0",
-                  padding: "10px",
-                  borderRadius: "4px",
+                  margin: 0,
                   overflowX: "auto",
                 }}
               >
