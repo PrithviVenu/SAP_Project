@@ -21,7 +21,7 @@ Return the output as a JSON object with these fields:
 compatibility: string
 issues: list of strings
 recommendations: list of strings
-converted_code: string (the refactored ABAP code)
+converted_code: string (the refactored ABAP code compatible with S/4HANA)
 """
 
 # Function to analyze ABAP code using OpenAI

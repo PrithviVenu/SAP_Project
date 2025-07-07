@@ -1,6 +1,6 @@
 # ABAP Code Analyzer
 
-A simple web app to analyze ABAP code compatibility with SAP S/4HANA using OpenAI's API.
+A web app that analyzes ABAP code for SAP S/4HANA compatibility, identifies deprecated functions, suggests modern replacements, and provides refactored S/4HANA-compliant code using OpenAI's API.
 
 ## Backend (my environment)
 
@@ -44,3 +44,7 @@ A simple web app to analyze ABAP code compatibility with SAP S/4HANA using OpenA
 `npm run dev`
 
 Frontend runs at http://localhost:5173.
+
+## Sample Output
+
+![alt text](image.png)
