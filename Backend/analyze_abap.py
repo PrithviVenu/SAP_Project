@@ -15,11 +15,13 @@ You are an SAP ABAP and S/4HANA migration expert. Analyze the following ABAP cod
 2. Deprecated functions or APIs.
 3. Suggested modern replacements.
 4. Performance optimizations for HANA.
+5. A refactored version of the code compatible with S/4HANA.
 
 Return the output as a JSON object with these fields:
 compatibility: string
 issues: list of strings
 recommendations: list of strings
+converted_code: string (the refactored ABAP code)
 """
 
 # Function to analyze ABAP code using OpenAI

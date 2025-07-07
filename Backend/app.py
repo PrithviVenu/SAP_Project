@@ -49,14 +49,15 @@ def analyze_endpoint():
             "analysis": {
                 "compatibility": "Unknown",
                 "issues": ["Unable to parse the response as JSON."],
-                "recommendations": ["Ensure the ABAP code input is correct."]
+                "recommendations": ["Ensure the ABAP code input is correct."],
+                "converted_code": "N/A"
             }
         })
         if not fixed_json:
             return jsonify({"error": "Empty JSON response from analyzer"}), 500
 
         analysis_json = json.loads(fixed_json)
-        required_keys = {"compatibility", "issues", "recommendations"}
+        required_keys = {"compatibility", "issues", "recommendations", "converted_code"}
         if not required_keys.issubset(analysis_json.keys()):
             return jsonify({"error": "Incomplete analysis data"}), 500
         

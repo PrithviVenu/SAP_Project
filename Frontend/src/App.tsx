@@ -4,6 +4,7 @@ interface AnalysisResult {
   compatibility: string;
   issues: string[];
   recommendations: string[];
+  converted_code?: string;
 }
 // Normalizes the compatibility string for consistent display
 function normalizeCompatibility(text: string) {
@@ -103,6 +104,21 @@ export default function App() {
               ))}
             </ul>
           </div>
+          {result.converted_code && (
+            <div style={{ marginTop: 20 }}>
+              <strong>Converted Code:</strong>
+              <pre
+                style={{
+                  backgroundColor: "#f0f0f0",
+                  padding: "10px",
+                  borderRadius: "4px",
+                  overflowX: "auto",
+                }}
+              >
+                {result.converted_code}
+              </pre>
+            </div>
+          )}
         </div>
       )}
     </div>
