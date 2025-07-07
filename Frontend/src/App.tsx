@@ -5,8 +5,18 @@ interface AnalysisResult {
   issues: string[];
   recommendations: string[];
 }
+// Normalizes the compatibility string for consistent display
+function normalizeCompatibility(text: string) {
+  let norm = text.trim().toLowerCase();
 
-function App() {
+  if (norm.includes("partial")) return "Partial Compatibility";
+  if (norm.includes("full")) return "Fully Compatible";
+  if (norm.includes("incompatible")) return "Incompatible";
+
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+export default function App() {
   const [code, setCode] = useState<string>("");
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,6 +39,11 @@ function App() {
       }
 
       const data = await response.json();
+      if (data.analysis && data.analysis.compatibility) {
+        data.analysis.compatibility = normalizeCompatibility(
+          data.analysis.compatibility
+        );
+      }
       setResult(data.analysis);
     } catch (err: any) {
       setError(err.message || "An error occurred");
@@ -40,6 +55,7 @@ function App() {
   return (
     <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
       <h1>ABAP Code Analyzer</h1>
+
       <textarea
         rows={10}
         value={code}
@@ -48,6 +64,7 @@ function App() {
         style={{ width: "100%", fontFamily: "monospace" }}
       />
       <br />
+
       <button onClick={analyzeCode} disabled={loading || !code.trim()}>
         {loading ? "Analyzing..." : "Analyze"}
       </button>
@@ -55,13 +72,39 @@ function App() {
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
       {result && (
-        <div style={{ marginTop: 20 }}>
+        <div
+          style={{
+            marginTop: 20,
+            background: "#f9f9f9",
+            padding: 16,
+            borderRadius: 8,
+          }}
+        >
           <h2>Analysis Result:</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+
+          <p>
+            <strong>Compatibility:</strong> {result.compatibility}
+          </p>
+
+          <div>
+            <strong>Issues:</strong>
+            <ul>
+              {result.issues.map((issue, index) => (
+                <li key={index}>{issue}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <strong>Recommendations:</strong>
+            <ul>
+              {result.recommendations.map((rec, index) => (
+                <li key={index}>{rec}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>
   );
 }
-
-export default App;

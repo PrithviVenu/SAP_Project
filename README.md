@@ -11,7 +11,7 @@ A simple web app to analyze ABAP code compatibility with SAP S/4HANA using OpenA
 - Create and activate a conda environment:
 
   ```
-  conda create -n abap-analyzer python=3.9 -y
+  conda create -n abap-analyzer python=3.13 -y
   conda activate abap-analyzer
   ```
 
