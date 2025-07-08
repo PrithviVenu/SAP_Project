@@ -18,7 +18,7 @@ You are an SAP ABAP and S/4HANA migration expert. Analyze the following ABAP cod
 5. A refactored version of the code compatible with S/4HANA.
 
 Return the output as a JSON object with these fields:
-compatibility: string
+compatibility: "PARTIALLY_COMPATIBLE" | "FULLY_COMPATIBLE" | "NOT_COMPATIBLE"
 issues: list of strings
 recommendations: list of strings
 converted_code: string (the refactored ABAP code compatible with S/4HANA)
@@ -31,6 +31,7 @@ def analyze_abap(code: str):
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": f"Analyze this ABAP code:\n\n{code}"}
-        ]
+        ],
+        temperature=0
     )
     return response.choices[0].message.content

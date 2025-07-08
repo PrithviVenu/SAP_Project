@@ -8,11 +8,17 @@ interface AnalysisResult {
 }
 
 function normalizeCompatibility(text: string) {
-  const norm = text.trim().toLowerCase();
-  if (norm.includes("partial")) return "Partial Compatibility";
-  if (norm.includes("full")) return "Fully Compatible";
-  if (norm.includes("incompatible")) return "Incompatible";
-  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  const norm = text.trim().toUpperCase();
+  switch (norm) {
+    case "PARTIALLY_COMPATIBLE":
+      return "Partial Compatibility";
+    case "FULLY_COMPATIBLE":
+      return "Fully Compatible";
+    case "NOT_COMPATIBLE":
+      return "Not Compatible";
+    default:
+      return text;
+  }
 }
 
 export default function App() {
