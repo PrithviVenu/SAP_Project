@@ -19,7 +19,7 @@ A web app that analyzes ABAP code for SAP S/4HANA compatibility, identifies depr
 
   `pip install -r requirements.txt`
 
-- Create a .env file in backend/ with your OpenAI API key:
+- Create a .env file in Backend/ with your OpenAI API key:
 
   `OPENAI_API_KEY=your_openai_api_key_here`
 
@@ -38,6 +38,10 @@ A web app that analyzes ABAP code for SAP S/4HANA compatibility, identifies depr
 - Install dependencies:
 
 `npm install`
+
+- Create a .env file in Frontend/ with below content:
+
+  `VITE_BACKEND_URL="http://127.0.0.1:5000/analyze"`
 
 - Start the React app:
 
