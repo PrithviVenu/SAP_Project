@@ -41,7 +41,7 @@ A web app that analyzes ABAP code for SAP S/4HANA compatibility, identifies depr
 
 - Create a .env file in Frontend/ with below content:
 
-  `VITE_BACKEND_URL="http://127.0.0.1:5000/analyze"`
+  `VITE_BACKEND_URL="http://127.0.0.1:5000"`
 
 - Start the React app:
 

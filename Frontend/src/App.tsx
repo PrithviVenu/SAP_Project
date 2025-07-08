@@ -28,7 +28,8 @@ export default function App() {
     setResult(null);
 
     try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_URL, {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code }),
